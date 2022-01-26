@@ -1,0 +1,18 @@
+<!--index.wxml-->
+<view>
+  <map style="position: relative; left: 50rpx; top: -2rpx; width: 650rpx; height: 480rpx; display: block; box-sizing: border-box" 
+  show-location="true" 
+  id="mapp"
+  class="map"
+  markers="{{markers}}"
+  scale="{{scale}}">
+  </map>
+  <button type="primary" bindtap="showAll" style="position: relative; left: -154rpx; top: -2rpx; width: 344rpx; height: 78rpx; display: block; box-sizing: border-box">
+    全览
+  </button>
+
+  <button bindtap="Locate" style="position: relative; left: 174rpx; top: -80rpx; width: 302rpx; height: 78rpx; display: block; box-sizing: border-box">
+    定位
+  </button>
+
+</view>
