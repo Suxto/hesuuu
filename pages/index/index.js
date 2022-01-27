@@ -22,8 +22,8 @@ Page({
         display: 'ALWAYS'
       },
       id: 1,
-      latitude: 22.52595,
-      longitude: 113.3626,
+      latitude: 22.51955,
+      longitude: 113.36362,
       joinCluster: true,
       width: 24,
       height: 24,
@@ -43,14 +43,6 @@ Page({
       height: 24,
       iconPath: '../../Image/Marker1_Activated@3x.png'
     }],
-    points: [{
-      latitude: 22.52595,
-      longitude: 113.3626,
-    }, {
-      latitude: 22.51795,
-      longitude: 113.39367,
-    },
-    ],
   },
 
 
@@ -79,7 +71,7 @@ Page({
   },
   showAll() {
     wx.createMapContext('mapp').includePoints({
-      points: this.data.points,
+      points: this.data.markers,
       padding: [30, 30, 30, 30]
     })
   },
