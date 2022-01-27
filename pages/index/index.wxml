@@ -16,7 +16,10 @@
   </button>
 
 </view>
-<text style="position: relative; left: 45rpx; top: -4rpx" >
-文本</text>
+<text style="position: relative; left: 45rpx; top: -52rpx" >
+ 当前核酸总人数：</text>
+
+ <text style="position: relative; left: 45rpx; top: -52rpx" >
+ 前面还有：{{left}}</text>
 
 
