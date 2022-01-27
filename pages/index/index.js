@@ -1,7 +1,7 @@
 // index.js
 // 获取应用实例
 const app = getApp();
-var that=this;
+var that = this;
 Page({
   data: {
     userInfo: {},
@@ -11,8 +11,8 @@ Page({
     canIUseOpenData: wx.canIUse('open-data.type.userAvatarUrl') && wx.canIUse('open-data.type.userNickName'), // 如需尝试获取用户信息可改为false
     time: (new Date()).toString(),
     scale: 18,
-    longitude: 22.1,
-    latitude: 113.2,
+    longitude: getLon(),
+    latitude: getLat(),
     markers: [{
       id: 1,
       latitude: 22.953416,
@@ -20,33 +20,36 @@ Page({
       joinCluster: true,
       width: 24,
       height: 24,
-      iconPath:  '../../Image/Marker1_Activated@3x.png'
-    },{
+      iconPath: '../../Image/Marker1_Activated@3x.png'
+    }, {
       id: 2,
       latitude: 22.984104,
       longitude: 113.407503,
       joinCluster: true,
       width: 24,
       height: 24,
-      iconPath:  '../../Image/Marker1_Activated@3x.png'
+      iconPath: '../../Image/Marker1_Activated@3x.png'
     }],
     points: [{
       latitude: 22.953416,
       longitude: 113.480945,
-    },{
+    }, {
       latitude: 22.984104,
       longitude: 113.407503,
     },
-  ],
+    ],
   },
-  
-  
+
+
+  getLon() {
+    wx.getLocation();
+  },
   bindViewTap() {
     wx.navigateTo({
       url: '../logs/logs'
     })
   },
- 
+
   onLoad() {
     if (wx.getUserProfile) {
       this.setData({
@@ -54,14 +57,14 @@ Page({
       })
     }
   },
-  onReady(){
+  onReady() {
     wx.createMapContext('mapp').moveToLocation()
   },
-  Locate(){
-    wx.createMapContext('mapp',this).moveToLocation();
-    this.setData({scale: 18});
+  Locate() {
+    wx.createMapContext('mapp', this).moveToLocation();
+    this.setData({ scale: 18 });
   },
-  showAll(){
+  showAll() {
     wx.createMapContext('mapp').includePoints({
       points: this.data.points,
       padding: [25, 25, 25, 25]
