@@ -6,6 +6,8 @@
   class="map"
   markers="{{markers}}"
   scale="{{scale}}"
+  longitude="{{longitude}}"
+  latitude="{{latitude}}"
   ></map>
   <button type="primary" bindtap="showAll" style="position: relative; left: -154rpx; top: -2rpx; width: 344rpx; height: 78rpx; display: block; box-sizing: border-box">
     全览
@@ -16,10 +18,13 @@
   </button>
 
 </view>
-<text style="position: relative; left: 45rpx; top: -52rpx" >
- 当前核酸总人数：</text>
 
- <text style="position: relative; left: 45rpx; top: -52rpx" >
- 前面还有：{{left}}</text>
+<view>
+<rich-text 
+nodes=
+"<h3 style='color:red;'>前方还有：{{left}} 人</h3><br><h3 style='color:red;'>检测速度：{{speed}} 人/分钟</h3>" 
+style="position: relative; left: 45rpx; top: -10rpx">
+</rich-text>
+</view>
 
 

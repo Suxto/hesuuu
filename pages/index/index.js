@@ -1,8 +1,6 @@
 // index.js
 const app = getApp();
 var lo,la;
-la=22.51955;
-lo= 113.36362;
 wx.onLocationChange((result) => {
   la=result.latitude;
   lo=result.longitude;
@@ -17,8 +15,10 @@ Page({
     canIUseOpenData: wx.canIUse('open-data.type.userAvatarUrl') && wx.canIUse('open-data.type.userNickName'), 
     time: (new Date()).toString(),
     scale: 18,
-    longitude: 11,
-    latitude: 11,
+    longitude: lo,
+    latitude: la,
+    left:22,
+    speed:50,
     markers: [{
       callout: {
         content: '起点',
@@ -77,7 +77,31 @@ Page({
     wx.createMapContext('mapp').moveToLocation()
   },
   Locate() {
-    this.setData({ scale: 18 });
+    // var a=this.latitude;
+    // var b=this.longitude;
+    // wx.getLocation({
+    //   type: 'wgs84',
+    //   success (res) {
+    //   const latitude = res.latitude
+    //   const longitude = res.longitude
+    //   const speed = res.speed
+    //   const accuracy = res.accuracy;
+    //   a=latitude;
+    //   b=longitude;
+    //   }
+    //   })
+    wx.onLocationChange((result) => {
+      la=result.latitude;
+      lo=result.longitude;
+      console.log(lo,la);
+      this.data.latitude=la;
+      this.data.longitude=lo;
+    })
+    this.setData({ 
+      longitude: this.data.longitude,
+      latitude: this.data.latitude,
+      scale: 18,
+     });
     wx.createMapContext('mapp', this).moveToLocation();
     
   },
