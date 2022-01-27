@@ -1,7 +1,8 @@
 // index.js
 // 获取应用实例
 const app = getApp();
-var that = this;
+var lo,la;
+wx.onLocationChange((result) => {la=result.latitude;lo=result.longitude;console.log(lo,la)})
 Page({
   data: {
     userInfo: {},
@@ -11,31 +12,43 @@ Page({
     canIUseOpenData: wx.canIUse('open-data.type.userAvatarUrl') && wx.canIUse('open-data.type.userNickName'), // 如需尝试获取用户信息可改为false
     time: (new Date()).toString(),
     scale: 18,
-    longitude: getLon(),
-    latitude: getLat(),
+    longitude: 11,
+    latitude: 11,
     markers: [{
+      callout: {
+        content: '起点',
+        padding: 10,
+        borderRadius: 2,
+        display: 'ALWAYS'
+      },
       id: 1,
-      latitude: 22.953416,
-      longitude: 113.480945,
+      latitude: 22.52595,
+      longitude: 113.3626,
       joinCluster: true,
       width: 24,
       height: 24,
       iconPath: '../../Image/Marker1_Activated@3x.png'
     }, {
+      callout: {
+        content: '终点',
+        padding: 10,
+        borderRadius: 2,
+        display: 'ALWAYS'
+      },
       id: 2,
-      latitude: 22.984104,
-      longitude: 113.407503,
+      latitude: 22.51795,
+      longitude: 113.39367,
       joinCluster: true,
       width: 24,
       height: 24,
       iconPath: '../../Image/Marker1_Activated@3x.png'
     }],
     points: [{
-      latitude: 22.953416,
-      longitude: 113.480945,
+      latitude: 22.52595,
+      longitude: 113.3626,
     }, {
-      latitude: 22.984104,
-      longitude: 113.407503,
+      latitude: 22.51795,
+      longitude: 113.39367,
     },
     ],
   },
@@ -67,7 +80,7 @@ Page({
   showAll() {
     wx.createMapContext('mapp').includePoints({
       points: this.data.points,
-      padding: [25, 25, 25, 25]
+      padding: [30, 30, 30, 30]
     })
   },
   getUserProfile(e) {
