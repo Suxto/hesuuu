@@ -16,3 +16,7 @@
   </button>
 
 </view>
+<text style="position: relative; left: 45rpx; top: -4rpx" >
+文本</text>
+
+

@@ -1,8 +1,13 @@
 // index.js
-// 获取应用实例
 const app = getApp();
 var lo,la;
-wx.onLocationChange((result) => {la=result.latitude;lo=result.longitude;console.log(lo,la)})
+la=22.51955;
+lo= 113.36362;
+wx.onLocationChange((result) => {
+  la=result.latitude;
+  lo=result.longitude;
+  console.log(lo,la);
+})
 Page({
   data: {
     userInfo: {},
@@ -42,6 +47,12 @@ Page({
       width: 24,
       height: 24,
       iconPath: '../../Image/Marker1_Activated@3x.png'
+    },{
+      id: 3,
+      alpha: 0,
+      latitude:la,
+      longitude:lo,
+      iconPath:'../../Image/empty.png'
     }],
   },
 
@@ -71,6 +82,13 @@ Page({
     
   },
   showAll() {
+    wx.onLocationChange((result) => {
+      la=result.latitude;
+      lo=result.longitude;
+      console.log(lo,la);
+      this.data.markers[2].latitude=la;
+      this.data.markers[2].longitude=lo;
+    })
     wx.createMapContext('mapp').includePoints({
       points: this.data.markers,
       padding: [30, 30, 30, 30]
