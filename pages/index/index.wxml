@@ -5,8 +5,8 @@
   id="mapp"
   class="map"
   markers="{{markers}}"
-  scale="{{scale}}">
-  </map>
+  scale="{{scale}}"
+  ></map>
   <button type="primary" bindtap="showAll" style="position: relative; left: -154rpx; top: -2rpx; width: 344rpx; height: 78rpx; display: block; box-sizing: border-box">
     全览
   </button>

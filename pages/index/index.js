@@ -66,8 +66,9 @@ Page({
     wx.createMapContext('mapp').moveToLocation()
   },
   Locate() {
-    wx.createMapContext('mapp', this).moveToLocation();
     this.setData({ scale: 18 });
+    wx.createMapContext('mapp', this).moveToLocation();
+    
   },
   showAll() {
     wx.createMapContext('mapp').includePoints({
