@@ -10,18 +10,6 @@
     "navigationBarTextStyle":"black"
   },
   "plugins": {
-    "routePlan": {
-      "version": "1.0.19",
-      "provider": "wx50b5593e81dd937a"
-    },
-    "chooseLocation": {
-      "version": "1.0.9",
-      "provider": "wx76a9a06e5b4e693e"
-    },
-    "citySelector": {
-      "version": "1.0.1",
-      "provider": "wx63ffb7b7894e99ae"
-    }
   },
   "useExtendedLib": {
     "weui": true
