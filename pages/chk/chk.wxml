@@ -1,0 +1,18 @@
+<!--pages/chk/chk.wxml-->
+<image style="position: relative; left: 190rpx; top: 130rpx; width: 380rpx; height: 180rpx; display: inline-block; box-sizing: border-box" src="../../Image/hesuu.png" />
+<text>\n\n\n\n\n</text>
+
+<form bindsubmit="entry">
+<view class="page-section">
+    <view class="weui-cells__title">请输入4位检测码（均为数字）</view>
+    <view class="weui-cells weui-cells_after-title">
+      <view class="weui-cell weui-cell_input">
+        <input class="weui-input" maxlength="4" placeholder="4位检测码" type="digit"    name="degits"/>
+      </view>
+    </view>
+  </view>
+  <button style="position: relative; left: 25rpx; top: 100rpx;width: 320rpx; display: inline-block; box-sizing: border-box" form-type="submit" type="primary" >
+  进入检测</button> 
+  <button style="position: relative; left: 70rpx; top: 100rpx;width: 320rpx; display: inline-block; box-sizing: border-box" form-type="reset" type="default" >
+  清除</button> 
+</form>

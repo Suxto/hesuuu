@@ -1,4 +1,4 @@
-// pages/index/index.js
+// pages/chk/chk.js
 Page({
 
   /**
@@ -19,7 +19,9 @@ Page({
    * 生命周期函数--监听页面初次渲染完成
    */
   onReady: function () {
-
+      wx.setNavigationBarTitle({
+        title: '速核：检测',
+      })
   },
 
   /**
@@ -63,17 +65,7 @@ Page({
   onShareAppMessage: function () {
 
   },
-
-  goChk(){
-    wx.navigateTo({
-      url: '../chk/chk',
-    })
-},
-  goCrt:function(){
-    wx.navigateTo({
-      url: '../creat/creat',
-    })
+  entry:function(){
+    
   }
 })
-
-

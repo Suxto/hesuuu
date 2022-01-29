@@ -1,4 +1,4 @@
-// pages/index/index.js
+// pages/creat/creat.js
 Page({
 
   /**
@@ -19,7 +19,9 @@ Page({
    * 生命周期函数--监听页面初次渲染完成
    */
   onReady: function () {
-
+      wx.setNavigationBarTitle({
+        title: '速核：创建',
+      })
   },
 
   /**
@@ -62,18 +64,5 @@ Page({
    */
   onShareAppMessage: function () {
 
-  },
-
-  goChk(){
-    wx.navigateTo({
-      url: '../chk/chk',
-    })
-},
-  goCrt:function(){
-    wx.navigateTo({
-      url: '../creat/creat',
-    })
   }
 })
-
-

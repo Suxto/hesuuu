@@ -1,7 +1,10 @@
 {
   "pages":[
     "pages/index/index",
-    "pages/logs/logs"
+    "pages/logs/logs",
+    "pages/map/map",
+    "pages/chk/chk",
+    "pages/creat/creat"
   ],
   "window":{
     "backgroundTextStyle":"light",
@@ -16,7 +19,7 @@
   },
   "permission": {
     "scope.userLocation": {
-      "desc": "你的位置信息将用于小程序位置接口的效果展示" 
+      "desc": "你的位置信息将用于位置展示" 
     }
   },
   "style": "v2",

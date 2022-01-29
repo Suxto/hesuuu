@@ -1,30 +1,8 @@
-<!--index.wxml-->
-<view>
-  <map style="position: relative; left: 50rpx; top: -2rpx; width: 650rpx; height: 480rpx; display: block; box-sizing: border-box" 
-  show-location="true" 
-  id="mapp"
-  class="map"
-  markers="{{markers}}"
-  scale="{{scale}}"
-  longitude="{{longitude}}"
-  latitude="{{latitude}}"
-  ></map>
-  <button type="primary" bindtap="showAll" style="position: relative; left: -154rpx; top: -2rpx; width: 344rpx; height: 78rpx; display: block; box-sizing: border-box">
-    全览
-  </button>
 
-  <button bindtap="Locate" style="position: relative; left: 174rpx; top: -80rpx; width: 302rpx; height: 78rpx; display: block; box-sizing: border-box">
-    定位
-  </button>
+<!--pages/index/index.wxml-->
+<image style="position: relative; left: 155rpx; top: 170rpx; width: 490rpx; height: 290rpx; display: inline-block; box-sizing: border-box" src="../../Image/hesuu.png" />
 
-</view>
-
-<view>
-<rich-text 
-nodes=
-"<h3 style='color:red;'>前方还有：{{left}} 人</h3><br><h3 style='color:red;'>检测速度：{{speed}} 人/分钟</h3>" 
-style="position: relative; left: 45rpx; top: -10rpx">
-</rich-text>
-</view>
-
-
+<text>\n\n\n\n\n\n\n\n\n</text>
+<button type="primary" bindtap="goChk" >检测</button>
+<text>\n\n</text>
+<button type="default" bindtap="goCrt">创建</button>
