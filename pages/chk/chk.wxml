@@ -7,12 +7,15 @@
     <view class="weui-cells__title">请输入4位检测码（均为数字）</view>
     <view class="weui-cells weui-cells_after-title">
       <view class="weui-cell weui-cell_input">
-        <input class="weui-input" maxlength="4" placeholder="4位检测码" type="digit"    name="degits"/>
+        <input class="weui-input" maxlength="4" placeholder="4位检测码" type="digit"    name="num"/>
       </view>
     </view>
   </view>
-  <button style="position: relative; left: 25rpx; top: 100rpx;width: 320rpx; display: inline-block; box-sizing: border-box" form-type="submit" type="primary" >
+  <text style="position: relative;color: red; left: 25rpx; top: 10rpx;">{{reminder}}</text>
+  <view>
+  <button style="position: relative; left: 25rpx; top: 45rpx;width: 320rpx; display: inline-block; box-sizing: border-box" form-type="submit" type="primary" >
   进入检测</button> 
-  <button style="position: relative; left: 70rpx; top: 100rpx;width: 320rpx; display: inline-block; box-sizing: border-box" form-type="reset" type="default" >
+  <button style="position: relative; left: 70rpx; top: 45rpx;width: 320rpx; display: inline-block; box-sizing: border-box" form-type="reset" type="default" bindtap="clear">
   清除</button> 
+  </view>
 </form>

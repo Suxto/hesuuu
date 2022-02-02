@@ -5,7 +5,7 @@ Page({
    * 页面的初始数据
    */
   data: {
-
+    reminder:'',
   },
 
   /**
@@ -65,7 +65,55 @@ Page({
   onShareAppMessage: function () {
 
   },
-  entry:function(){
-    
+  clear:function(){
+    this.setData({
+      reminder:'',
+    })
+  }
+  ,
+  entry:function(data){
+      //console.log(data.detail.value.num);
+      var numStr=data.detail.value.num
+      if(numStr.length<4){
+        this.setData({
+          reminder:'请输入有效检验码',
+        })
+        return;
+      }
+      //var num=parseInt(numStr)
+      //web socket
+      var that = this;
+      wx.request({
+        url: 'http://localhost:8080/Hesuu_sever_war_exploded/Servlet', 
+       data: { //传递给后台的数据
+          transInfo: 'chk'+numStr,
+       },
+        method: 'get',
+        header: {
+          'content-type': 'application/json' //默认值
+        },
+        success: function(res) { //后台返回的数据
+          if(res.data=='nope') {
+          that.setData({
+            reminder: '无效数字',
+          })
+          return;
+        }else{
+          //console.log(res.data);
+          wx.navigateTo({
+            url: '/pages/map/map?userData=true&numData='+numStr,
+          })
+        }
+         // console.log(res.data);
+        },
+        fail: function(res) { 
+          that.setData({
+            reminder: '无法连接，请检查网络',
+          })
+          console.log("失败");
+        }
+      })
+
   }
 })
+

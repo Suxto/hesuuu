@@ -1,57 +1,56 @@
 // index.js
 const app = getApp();
 var lo,la;
-wx.onLocationChange((result) => {
-  la=result.latitude;
-  lo=result.longitude;
-  //console.log(lo,la);
-})
+lo=la=null;
+// wx.onLocationChange((result) => {
+//   la=result.latitude;
+//   lo=result.longitude;
+//   //console.log(lo,la);
+// })
 Page({
-  data: {
-    userInfo: {},
-    hasUserInfo: false,
-    canIUse: wx.canIUse('button.open-type.getUserInfo'),
-    canIUseGetUserProfile: false,
-    canIUseOpenData: wx.canIUse('open-data.type.userAvatarUrl') && wx.canIUse('open-data.type.userNickName'), 
-    time: (new Date()).toString(),
+  data: { 
     scale: 18,
-    longitude: lo,
-    latitude: la,
-    left:22,
-    speed:50,
+    longitude: null,
+    latitude: null,
+    num:null,
+    user:null,
+    left:null,
+    speed:null,
     markers: [{
       callout: {
-        content: '起点',
+        content: '检测点',
         padding: 10,
         borderRadius: 2,
         display: 'ALWAYS'
       },
-      id: 1,
-      latitude: 22.51955,
-      longitude: 113.36362,
+      id: 0,
+      latitude: null,
+      longitude: null,
       joinCluster: true,
       width: 24,
       height: 24,
       iconPath: '../../Image/Marker1_Activated@3x.png'
     }, {
       callout: {
-        content: '终点',
+        content: '队尾',
         padding: 10,
         borderRadius: 2,
         display: 'ALWAYS'
       },
-      id: 2,
-      latitude: 22.51795,
-      longitude: 113.39367,
+      id: 1,
+      latitude: null,
+      longitude: null,
       joinCluster: true,
       width: 24,
       height: 24,
       iconPath: '../../Image/Marker1_Activated@3x.png'
     },{
-      id: 3,
+      id: 2,
       alpha: 0,
       latitude:la,
       longitude:lo,
+      width: 2,
+      height: 2,
       iconPath:'../../Image/empty.png'
     }],
   },
@@ -59,7 +58,7 @@ Page({
   bindtest: function(options) {
     var that = this;
     wx.request({
-      url: 'http://localhost:8080/testOne_war_exploded/', //本地服务器地址
+      url: 'http://localhost:8080/testOne_war_exploded/', //服务器地址
       data: { //data中的参数值就是传递给后台的数据
         transInfo: '小程序端给后台的数据'
       },
@@ -79,21 +78,46 @@ Page({
     })
   },
 
-  bindViewTap() {
-    wx.navigateTo({
-      url: '../logs/logs'
+  onLoad:function(options) {
+    var that=this;
+    var numm=options.numData;
+    that.setData({
+      num: numm,
+      user: options.userData,
     })
-  },
-
-  onLoad() {
-    if (wx.getUserProfile) {
-      this.setData({
-        canIUseGetUserProfile: true
-      })
-    }
+    wx.request({
+      url: 'http://localhost:8080/Hesuu_sever_war_exploded/Servlet', 
+     data: { //传递给后台的数据
+        transInfo: 'chk'+numm,
+     },
+      method: 'get',
+      header: {
+        'content-type': 'application/json' //默认值
+      },
+      success: function(res) { //后台返回的数据
+        var strArray=[];
+        strArray=res.data.split(',');
+        console.log(res.data,strArray[1]);
+          var dir0="markers["+0+"].latitude",dir1="markers["+0+"].longitude";
+          var dir2="markers["+1+"].latitude",dir3="markers["+1+"].longitude"
+          that.setData({
+            [dir0]:parseInt(strArray[0]),
+            [dir1]:parseInt(strArray[1]),
+            [dir2]:parseInt(strArray[2]),
+            [dir3]:parseInt(strArray[3]),
+             left: parseInt(strArray[4]),
+          })
+        console.log(strArray);
+      },
+      fail: function(res) { 
+        console.log("失败");
+      }
+    })
   },
   onReady() {
     wx.createMapContext('mapp').moveToLocation()
+    //this.onLoad();
+    this.showAll();
   },
   Locate() {
     // var a=this.latitude;
@@ -137,27 +161,6 @@ Page({
       padding: [30, 30, 30, 30]
     })
   },
-  getUserProfile(e) {
-    // 推荐使用wx.getUserProfile获取用户信息，开发者每次通过该接口获取用户个人信息均需用户确认，开发者妥善保管用户快速填写的头像昵称，避免重复弹窗
-    wx.getUserProfile({
-      desc: '展示用户信息', // 声明获取用户个人信息后的用途，后续会展示在弹窗中，请谨慎填写
-      success: (res) => {
-        console.log(res)
-        this.setData({
-          userInfo: res.userInfo,
-          hasUserInfo: true
-        })
-      }
-    })
-  },
-  getUserInfo(e) {
-    // 不推荐使用getUserInfo获取用户信息，预计自2021年4月13日起，getUserInfo将不再弹出弹窗，并直接返回匿名的用户个人信息
-    console.log(e)
-    this.setData({
-      userInfo: e.detail.userInfo,
-      hasUserInfo: true
-    })
-  }
 })
 
 

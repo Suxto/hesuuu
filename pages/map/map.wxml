@@ -19,13 +19,19 @@
 
 </view>
 
-<view>
+<view wx:if="{{user}}">
 <rich-text 
 nodes=
 "<h3 style='color:red;'>前方还有：{{left}} 人</h3><br><h3 style='color:red;'>检测速度：{{speed}} 人/分钟</h3>" 
 style="position: relative; left: 45rpx; top: -10rpx">
 </rich-text>
 </view>
-<button bindtap="bindtest">test</button>
 
+<view wx:else>
+  <rich-text 
+  nodes=
+  "<h3 style='color:red;'>参检测人数：{{sum}} 人</h3><br><h3 style='color:red;'>检测速度：{{speed}} 人/分钟</h3>" 
+  style="position: relative; left: 45rpx; top: -10rpx">
+  </rich-text>
+</view>
 
