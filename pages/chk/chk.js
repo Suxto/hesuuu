@@ -84,7 +84,7 @@ Page({
       //web socket
       var that = this;
       wx.request({
-        url: 'http://localhost:8080/Hesuu_sever_war_exploded/Servlet', 
+        url: 'http://1.117.232.194:8080/Hesuu_sever_war/Servlet', 
        data: { //传递给后台的数据
           transInfo: 'chk'+numStr,
        },

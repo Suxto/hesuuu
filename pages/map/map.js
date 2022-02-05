@@ -55,28 +55,29 @@ Page({
     }],
   },
 
-  bindtest: function(options) {
-    var that = this;
-    wx.request({
-      url: 'http://localhost:8080/testOne_war_exploded/', //服务器地址
-      data: { //data中的参数值就是传递给后台的数据
-        transInfo: '小程序端给后台的数据'
-      },
-      method: 'get',
-      header: {
-        'content-type': 'application/json' //默认值
-      },
-      success: function(res) { //res就是接收后台返回的数据
-        that.setData({
-          left: res.data
-        })
-        console.log(res.data);
-      },
-      fail: function(res) {
-        console.log("失败");
-      }
-    })
-  },
+  // request template
+  // bindtest: function(options) {
+  //   var that = this;
+  //   wx.request({
+  //     url: 'http://localhost:8080/testOne_war_exploded/', //服务器地址
+  //     data: { //data中的参数值就是传递给后台的数据
+  //       transInfo: '小程序端给后台的数据'
+  //     },
+  //     method: 'get',
+  //     header: {
+  //       'content-type': 'application/json' //默认值
+  //     },
+  //     success: function(res) { //res就是接收后台返回的数据
+  //       that.setData({
+  //         left: res.data
+  //       })
+  //       console.log(res.data);
+  //     },
+  //     fail: function(res) {
+  //       console.log("失败");
+  //     }
+  //   })
+  // },
 
   onLoad:function(options) {
     var that=this;
@@ -86,7 +87,7 @@ Page({
       user: options.userData,
     })
     wx.request({
-      url: 'http://localhost:8080/Hesuu_sever_war_exploded/Servlet', 
+      url: 'http://1.117.232.194:8080/Hesuu_sever_war/Servlet', 
      data: { //传递给后台的数据
         transInfo: 'chk'+numm,
      },
