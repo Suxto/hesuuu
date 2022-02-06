@@ -132,8 +132,8 @@ Page({
     latitude: null,
     num: null,
     left: null,
-    speed: null,
-    done: null,
+    speed: 22,
+    done: 0,
     markers: [{
       callout: {
         content: '检测点',
