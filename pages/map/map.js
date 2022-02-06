@@ -1,21 +1,137 @@
-// index.js
 const app = getApp();
-var lo,la;
+var lo,la,done,now;
 lo=la=null;
-// wx.onLocationChange((result) => {
-//   la=result.latitude;
-//   lo=result.longitude;
-//   //console.log(lo,la);
-// })
+
+var arrived=false
+
+wx.onLocationChange((result) => {
+  la=result.latitude;
+  lo=result.longitude;
+  //console.log(lo,la);
+  var that=this
+  if(that.data.user){
+    wx.request({
+      url: 'http://1.117.232.194:8080/Hesuu_sever_war/Servlet', 
+     data: { //传递给后台的数据
+        transInfo: 'chk'+that.data.num,
+     },
+      method: 'get',
+      header: {
+        'content-type': 'application/json' //默认值
+      },
+      success: function(res) { //后台返回的数据
+        var strArray=[];
+        strArray=res.data.split(',');
+        console.log(res.data,strArray[1]);
+         // var dir0="markers["+0+"].latitude",dir1="markers["+0+"].longitude";
+          var dir2="markers["+1+"].latitude",dir3="markers["+1+"].longitude"
+          //到队末就位后初始化
+          if(lo-markers[1].longitude<=1e-6&&la-markers[1].latitude<=1e-6&&!arrived){
+          done=parseInt(strArray[5])
+          now=parseInt(strArray[4])-done
+          that.setData({
+            // [dir0]:parseInt(strArray[0]),
+            // [dir1]:parseInt(strArray[1]),
+            [dir2]:parseInt(strArray[2]),
+            [dir3]:parseInt(strArray[3]),
+            left: '前方还有: '+now+' 人',
+          })
+            wx.request({
+              url: 'http://1.117.232.194:8080/Hesuu_sever_war/Servlet', 
+             data: { //传递给后台的数据
+                transInfo: 'add'+that.data.num+','+la+','+lo,
+             },
+              method: 'get',
+              header: {
+                'content-type': 'application/json' //默认值
+              },
+              success: function(res) { //后台返回的数据                
+                console.log(res);
+              },
+              fail: function(res) { 
+                console.log("失败");
+              }
+          })
+          arrived=true
+        }else if(arrived){//排队中变动前方人数
+          now=now-parseInt(strArray[5])+done;
+          that.setData({
+            // [dir0]:parseInt(strArray[0]),
+            // [dir1]:parseInt(strArray[1]),
+            [dir2]:parseInt(strArray[2]),
+            [dir3]:parseInt(strArray[3]),
+            left: '前方还有: '+now+' 人',
+        })}else if(!arrived){//未到队末时候动态显示队末
+          that.setData({
+            // [dir0]:parseInt(strArray[0]),
+            // [dir1]:parseInt(strArray[1]),
+            [dir2]:parseInt(strArray[2]),
+            [dir3]:parseInt(strArray[3]),
+            //left: '前方还有: '+strArray[4]+' 人',
+        })
+      }
+        //到达检测点      
+        if(lo-markers[0].longitude<=10e-6&&la-markers[0].latitude<=10e-6){
+          wx.request({
+            url: 'http://1.117.232.194:8080/Hesuu_sever_war/Servlet', 
+           data: { //传递给后台的数据
+              transInfo: 'don'+that.data.num,
+           },
+            method: 'get',
+            header: {
+              'content-type': 'application/json' //默认值
+            },
+            success: function(res) { //后台返回的数据
+              console.log(res);
+            },
+            fail: function(res) { 
+              console.log("失败");
+            }
+          })
+        }
+      },
+      fail: function(res) { 
+        console.log("失败");
+      }
+    })
+  }else{
+    wx.request({
+      url: 'http://1.117.232.194:8080/Hesuu_sever_war/Servlet', 
+     data: { //传递给后台的数据
+        transInfo: 'chk'+that.data.num,
+     },
+      method: 'get',
+      header: {
+        'content-type': 'application/json' //默认值
+      },
+      success: function(res) { //后台返回的数据
+        var strArray=[];
+        strArray=res.data.split(',');
+        console.log(res.data,strArray[1]);
+         // var dir0="markers["+0+"].latitude",dir1="markers["+0+"].longitude";
+          var dir2="markers["+1+"].latitude",dir3="markers["+1+"].longitude"
+          //到队末就位后初始化
+          done=parseInt(strArray[5])
+          now=parseInt(strArray[4])-done
+          that.setData({
+            // [dir0]:parseInt(strArray[0]),
+            // [dir1]:parseInt(strArray[1]),
+            [dir2]:parseInt(strArray[2]),
+            [dir3]:parseInt(strArray[3]),
+            done: parseInt(strArray[5]),
+          })
+  }
+})
+
 Page({
   data: { 
     scale: 18,
     longitude: null,
     latitude: null,
     num:null,
-    user:null,
     left:null,
     speed:null,
+    done:null,
     markers: [{
       callout: {
         content: '检测点',
@@ -55,30 +171,6 @@ Page({
     }],
   },
 
-  // request template
-  // bindtest: function(options) {
-  //   var that = this;
-  //   wx.request({
-  //     url: 'http://localhost:8080/testOne_war_exploded/', //服务器地址
-  //     data: { //data中的参数值就是传递给后台的数据
-  //       transInfo: '小程序端给后台的数据'
-  //     },
-  //     method: 'get',
-  //     header: {
-  //       'content-type': 'application/json' //默认值
-  //     },
-  //     success: function(res) { //res就是接收后台返回的数据
-  //       that.setData({
-  //         left: res.data
-  //       })
-  //       console.log(res.data);
-  //     },
-  //     fail: function(res) {
-  //       console.log("失败");
-  //     }
-  //   })
-  // },
-
   onLoad:function(options) {
     var that=this;
     var numm=options.numData;
@@ -106,7 +198,8 @@ Page({
             [dir1]:parseInt(strArray[1]),
             [dir2]:parseInt(strArray[2]),
             [dir3]:parseInt(strArray[3]),
-             left: parseInt(strArray[4]),
+            // left: parseInt(strArray[4]),
+            left:'请立即前往队尾排队'
           })
         console.log(strArray);
       },
@@ -121,19 +214,6 @@ Page({
     this.showAll();
   },
   Locate() {
-    // var a=this.latitude;
-    // var b=this.longitude;
-    // wx.getLocation({
-    //   type: 'wgs84',
-    //   success (res) {
-    //   const latitude = res.latitude
-    //   const longitude = res.longitude
-    //   const speed = res.speed
-    //   const accuracy = res.accuracy;
-    //   a=latitude;
-    //   b=longitude;
-    //   }
-    //   })
     wx.onLocationChange((result) => {
       la=result.latitude;
       lo=result.longitude;

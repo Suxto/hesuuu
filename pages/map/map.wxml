@@ -22,7 +22,7 @@
 <view wx:if="{{user}}">
 <rich-text 
 nodes=
-"<h3 style='color:red;'>前方还有：{{left}} 人</h3><br><h3 style='color:red;'>检测速度：{{speed}} 人/分钟</h3>" 
+"<h3 style='color:red;'>{{left}} </h3><br><h3 style='color:red;'>检测速度：{{speed}} 人/分钟</h3>" 
 style="position: relative; left: 45rpx; top: -10rpx">
 </rich-text>
 </view>
@@ -30,7 +30,7 @@ style="position: relative; left: 45rpx; top: -10rpx">
 <view wx:else>
   <rich-text 
   nodes=
-  "<h3 style='color:red;'>参检测人数：{{sum}} 人</h3><br><h3 style='color:red;'>检测速度：{{speed}} 人/分钟</h3>" 
+  "<h3 style='color:red;'>参检测人数：{{sum}} 人</h3><br><h3 style='color:red;'>队伍中人数：{{sum-done}}</h3><br><h3 style='color:red;'>检测速度：{{speed}} 人/分钟</h3><br><h3 style='color:red;'>完成人数：{{done}}</h3>" 
   style="position: relative; left: 45rpx; top: -10rpx">
   </rich-text>
 </view>
