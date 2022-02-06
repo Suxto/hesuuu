@@ -1,34 +1,32 @@
-
 <!--pages/creat/creat.wxml-->
 <image style="position: relative; left: 190rpx; top: 130rpx; width: 380rpx; height: 180rpx; display: inline-block; box-sizing: border-box" src="../../Image/hesuu.png" />
 <text>\n\n\n\n\n</text>
 
 <form bindsubmit="entry">
-<view class="page-section">
+  <view class="page-section">
     <view class="weui-cells__title">请创建4位检测码（均为数字）</view>
     <view class="weui-cells weui-cells_after-title">
       <view class="weui-cell weui-cell_input">
-        <input class="weui-input" maxlength="4" placeholder="4位检测码" type="digit"    name="num"/>
+        <input class="weui-input" maxlength="4" placeholder="4位检测码" type="digit" name="num" />
       </view>
     </view>
   </view>
   <text style="position: relative;color: red; left: 25rpx; top: 10rpx;">{{reminder}}</text>
   <view>
-  <button style="position: relative; left: 25rpx; top: 45rpx;width: 320rpx; display: inline-block; box-sizing: border-box" form-type="submit" type="primary" >
-  创建检测</button> 
-  <button style="position: relative; left: 70rpx; top: 45rpx;width: 320rpx; display: inline-block; box-sizing: border-box" form-type="reset" type="default" bindtap="clear">
-  清除</button> 
+    <button style="position: relative; left: 25rpx; top: 45rpx;width: 320rpx; display: inline-block; box-sizing: border-box" form-type="submit" type="primary">
+      创建检测</button>
+    <button style="position: relative; left: 70rpx; top: 45rpx;width: 320rpx; display: inline-block; box-sizing: border-box" form-type="reset" type="default" bindtap="clear">
+      清除</button>
   </view>
 </form>
 <view wx:if="{{page}}" style="position: relative; left: 0rpx; top: 70rpx;">
-<map scale="18" show-location="true" style="position:relative;left:27rpx;width: 680rpx;height: 370rpx;" id="map"></map>
-<text style="position: relative;color: red;left: 30rpx;">请移步到检测检测点，确认位置准确后点击确定
-</text>
-<view style="position: relative;top:-20rpx">
-<button style="position: relative; left: 25rpx; top: 45rpx;width: 320rpx; display: inline-block; box-sizing: border-box" bindtap="locate" type="primary" >
-  定位</button> 
-  <button style="position: relative; left: 70rpx; top: 45rpx;width: 320rpx; display: inline-block; box-sizing: border-box" bindtap="sure" type="default" bindtap="sure">
-  确定</button> 
+  <map scale="18" show-location="true" style="position:relative;left:27rpx;width: 680rpx;height: 370rpx;" id="map"></map>
+  <text style="position: relative;color: red;left: 30rpx;">请移步到检测检测点，确认位置准确后点击确定
+  </text>
+  <view style="position: relative;top:-20rpx">
+    <button style="position: relative; left: 25rpx; top: 45rpx;width: 320rpx; display: inline-block; box-sizing: border-box" bindtap="locate" type="primary">
+      定位</button>
+    <button style="position: relative; left: 70rpx; top: 45rpx;width: 320rpx; display: inline-block; box-sizing: border-box" bindtap="sure" type="default" bindtap="sure">
+      确定</button>
+  </view>
 </view>
-</view>
-
